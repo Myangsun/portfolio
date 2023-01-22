@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div
       className="text-gray-600 bg-zinc-50 h-screen snap-y snap-mandatory
-    overflow-scroll z-0"
+    overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
     >
       <Head>
         <title>Mingyang Sun</title>

@@ -2,6 +2,7 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type Props = {};
 
@@ -53,12 +54,14 @@ function Header({}: Props) {
         }}
         className="flex flex-row items-center text-gray-500 cursor-pointer"
       >
-        <SocialIcon
-          className="cursor-pointer"
-          network="email"
-          fgColor="gray"
-          bgColor="transparent"
-        />
+        <Link href="#contact">
+          <SocialIcon
+            className="cursor-pointer"
+            network="email"
+            fgColor="gray"
+            bgColor="transparent"
+          />
+        </Link>
         <Squares2X2Icon className="m-2" height={40} />
       </motion.div>
     </header>

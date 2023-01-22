@@ -41,7 +41,7 @@ function Intro({}: Props) {
           <Link className="mx-2" href="#skills">
             <button className="introButton">My Skills</button>
           </Link>
-          <Link className="mx-2" href="#project">
+          <Link className="mx-2" href="#projects">
             <button className="introButton">More Projects</button>
           </Link>
         </div>
