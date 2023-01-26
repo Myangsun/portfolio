@@ -1,20 +1,34 @@
 import Head from "next/head";
 import Header from "../components/Header";
-import Intro from "../components/Intro";
+import Hero from "../components/Hero";
 import AnimatedSphere from "../components/AnimatedSphere";
 import About from "../components/About";
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
+import Link from "next/link";
+import { PageInfo, Project, Skill, Social } from "../typings";
+import { GetStaticProps } from "next";
+import { fetchPageInfo } from "../utils/fetchPageInfo";
+import { fetchSkills } from "../utils/fetchSkills";
+import { fetchProjects } from "../utils/fetchProjects";
+import { fetchSocials } from "../utils/fetchSocials";
+import { urlFor } from "../sanity";
 
-export default function Home() {
+type Props = {
+  pageInfo: PageInfo;
+  skills: Skill[];
+  projects: Project[];
+  socials: Social[];
+};
+
+export default function Home({ pageInfo, skills, projects, socials }: Props) {
   return (
     <div
-      className="text-gray-600 bg-zinc-50 h-screen snap-y snap-mandatory
+      className="text-gray-600 bg-zinc-100 h-screen snap-y snap-mandatory
     overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
     >
       <Head>
@@ -22,11 +36,11 @@ export default function Home() {
       </Head>
 
       {/* Header */}
-      <Header />
+      <Header socials={socials} />
 
-      {/* Intro */}
-      <section id="intro" className="snap-start">
-        <Intro />
+      {/* Hero */}
+      <section id="hero" className="snap-start">
+        <Hero pageInfo={pageInfo} />
       </section>
 
       {/* Sphere */}
@@ -39,23 +53,54 @@ export default function Home() {
 
       {/* About */}
       <section id="about" className="snap-center">
-        <About />
+        <About pageInfo={pageInfo} />
       </section>
 
       {/* Skills */}
       <section id="skills" className="snap-start">
-        <Skills />
+        <Skills skills={skills} />
       </section>
 
       {/* Projects */}
       <section id="projects" className="snap-start">
-        <Projects />
+        <Projects projects={projects} />
       </section>
 
       {/* Contact Me */}
       <section id="contact" className="snap-start">
         <Contact />
       </section>
+
+      <Link href="#hero">
+        <footer className="sticky bottom-5 w-full cursor-pointer">
+          <div className="flex items-center justify-center">
+            <img
+              className="h-10 w-10 scale-150 rounded-full filter grayscale
+            hover:grayscale-0 cursor-pointer"
+              src={urlFor(pageInfo?.heroImage).url()}
+              alt=""
+            />
+          </div>
+        </footer>
+      </Link>
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const pageInfo: PageInfo = await fetchPageInfo();
+  const skills: Skill[] = await fetchSkills();
+  const projects: Project[] = await fetchProjects();
+  const socials: Social[] = await fetchSocials();
+
+  return {
+    props: {
+      pageInfo,
+      skills,
+      projects,
+      socials,
+    },
+    //next.js will attempt to re-generate the page
+    revalidate: 10,
+  };
+};

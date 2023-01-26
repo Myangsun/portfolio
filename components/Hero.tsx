@@ -2,12 +2,15 @@ import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import BackgroundCircle from "./BackgroundCircle";
 import Image from "next/image";
-import profilePic from "../public/logo1.png";
 import Link from "next/link";
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-function Intro({}: Props) {
+function Hero({pageInfo}: Props) {
   const [text, count] = useTypewriter({
     words: ["Creator", "UX/UI designer", "Web developer", "Urban designer"],
     loop: true,
@@ -20,14 +23,14 @@ function Intro({}: Props) {
     >
       <BackgroundCircle />
 
-      <Image
+      <img
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
-        src={profilePic}
+        src={urlFor(pageInfo?.profilePic).url()}
         alt=""
       />
       <div className="z-20">
-        <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[2px]">
-          Hi! I am Mingyang Sun. You can call me Mia or MS.
+        <h2 className="text-sm text-gray-500 pb-2 tracking-[2px]">
+          {`Hi! I am ${pageInfo?.name}. You can call me Mia Sun.`}
         </h2>
         <h1 className="text-5xl lg:text-6xl font-semibold px-10">
           <span className="mr-3"> I am a {text}</span>
@@ -50,4 +53,4 @@ function Intro({}: Props) {
   );
 }
 
-export default Intro;
+export default Hero;

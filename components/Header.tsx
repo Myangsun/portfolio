@@ -1,12 +1,16 @@
 import React from "react";
 import { SocialIcon } from "react-social-icons";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Social } from "../typings";
 
-type Props = {};
+type Props = {
+  socials: Social[],
+};
 
-function Header({}: Props) {
+function Header({socials}: Props) {
   return (
     <header className="sticky top-0 p-5 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center">
       <motion.div
@@ -23,21 +27,17 @@ function Header({}: Props) {
         }}
         className="flex flex-row items-center"
       >
-        <SocialIcon
-          url="https://www.linkedin.com/in/mingyang-sun-designer/"
+
+        {/* Social Icons */}
+        {socials.map((social) => 
+          <SocialIcon
+          key={social._id}
+          url={social.url}
           fgColor="gray"
           bgColor="transparent"
         />
-        <SocialIcon
-          url="https://www.linkedin.com/in/mingyang-sun-designer/"
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        <SocialIcon
-          url="https://www.linkedin.com/in/mingyang-sun-designer/"
-          fgColor="gray"
-          bgColor="transparent"
-        />
+        )}
+  
       </motion.div>
 
       <motion.div
@@ -55,14 +55,9 @@ function Header({}: Props) {
         className="flex flex-row items-center text-gray-500 cursor-pointer"
       >
         <Link href="#contact">
-          <SocialIcon
-            className="cursor-pointer"
-            network="email"
-            fgColor="gray"
-            bgColor="transparent"
-          />
+          <EnvelopeIcon className="m-2" height={32} />
         </Link>
-        <Squares2X2Icon className="m-2" height={40} />
+        <Squares2X2Icon className="m-2" height={32} />
       </motion.div>
     </header>
   );
