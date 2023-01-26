@@ -54,6 +54,7 @@ function Projects({ projects }: Props) {
                     className="h-10 w-10 object-cover"
                     key={technology._id}
                     src={urlFor(technology.image).url()}
+                    alt=""
                   />
                 ))}
               </div>
