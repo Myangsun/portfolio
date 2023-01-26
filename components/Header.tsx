@@ -1,16 +1,15 @@
 import React from "react";
 import { SocialIcon } from "react-social-icons";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { Squares2X2Icon } from "@heroicons/react/24/outline";
+import { EnvelopeIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Social } from "../typings";
 
 type Props = {
-  socials: Social[],
+  socials: Social[];
 };
 
-function Header({socials}: Props) {
+function Header({ socials }: Props) {
   return (
     <header className="sticky top-0 p-5 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center">
       <motion.div
@@ -27,17 +26,15 @@ function Header({socials}: Props) {
         }}
         className="flex flex-row items-center"
       >
-
         {/* Social Icons */}
-        {socials.map((social) => 
+        {socials.map((social) => (
           <SocialIcon
-          key={social._id}
-          url={social.url}
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        )}
-  
+            key={social._id}
+            url={social.url}
+            fgColor="gray"
+            bgColor="transparent"
+          />
+        ))}
       </motion.div>
 
       <motion.div

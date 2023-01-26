@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Link from "next/link";
+import { GetStaticProps } from "next";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import AnimatedSphere from "../components/AnimatedSphere";
@@ -9,9 +11,7 @@ import { OrbitControls } from "@react-three/drei";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
-import Link from "next/link";
 import { PageInfo, Project, Skill, Social } from "../typings";
-import { GetStaticProps } from "next";
 import { fetchPageInfo } from "../utils/fetchPageInfo";
 import { fetchSkills } from "../utils/fetchSkills";
 import { fetchProjects } from "../utils/fetchProjects";

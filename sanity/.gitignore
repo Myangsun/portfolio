@@ -26,3 +26,5 @@
 *.tsbuildinfo
 
 sanity/node_modules
+
+../.next/
