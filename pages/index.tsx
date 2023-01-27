@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import Head from "next/head";
 import Link from "next/link";
 import { GetStaticProps } from "next";
@@ -68,7 +70,7 @@ export default function Home({ pageInfo, skills, projects, socials }: Props) {
 
       {/* Contact Me */}
       <section id="contact" className="snap-start">
-        <Contact />
+        <Contact pageInfo={pageInfo} />
       </section>
 
       <Link href="#hero">
